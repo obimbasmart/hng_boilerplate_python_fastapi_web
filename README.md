@@ -19,4 +19,9 @@ FastAPI boilerplate
  ```sh
  python main.py
 ```
+## E-R Diagram
+![dbDiagrame_aviators](https://github.com/user-attachments/assets/ef7af33b-d925-47a3-8a26-371fda21c0ec)
 
+### API Docs
+> View the api documentation:
+https://app.swaggerhub.com/apis-docs/NORIABURE/Aviators_HNG/1.0.0
