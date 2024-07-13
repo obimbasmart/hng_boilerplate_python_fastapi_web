@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: HNG Boilerplate API - Aviators
+  description: A simple API for HNG Boilerplate project
+  version: 1.0.0
+servers:
+  - url: https://example.com/api/v1
+    description: Production server
+tags:
+  - name: Authentication
+    description: Operations on user authentication and authorization
+  - name: users
+    description: Operations about users
+paths:
+  /auth/register:
+    post:
+      summary: Create new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /auth/login:
+    post:
+      summary: Login
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/LoginCredentials'
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+
+components:
+  schemas:
+    NewUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        language:
+          type: string
+        region:
+          type: string
+      required:
+        - first_name
+        - last_name
+        - username
+        - email
+        - password
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        language:
+          type: string
+        region:
+          type: string
+
+    LoginCredentials:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+      required:
+        - email
+        - password
+
+    LoginResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
